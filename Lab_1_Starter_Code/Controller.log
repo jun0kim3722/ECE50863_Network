@@ -1,0 +1,38 @@
+
+
+14:20:27.161517
+Register Request 0
+
+
+14:20:28.259040
+Register Request 1
+
+
+14:20:29.590677
+Register Request 2
+
+
+14:20:29.590934
+Register Response 0
+
+
+14:20:29.591004
+Register Response 1
+
+
+14:20:29.591062
+Register Response 2
+
+
+14:20:29.591243
+Routing Update
+0,0:0,0
+0,1:1,20
+0,2:2,10
+1,0:0,20
+1,1:1,0
+1,2:2,30
+2,0:0,10
+2,1:1,30
+2,2:2,0
+Routing Complete
