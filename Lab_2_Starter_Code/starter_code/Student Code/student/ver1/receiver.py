@@ -25,36 +25,29 @@ if __name__ == '__main__':
 	data_list = {}
 	while True:
 		addr, data = recv_monitor.recv(max_packet_size)
-		# recv_monitor.send(sender_id, "recieve".encode('utf-8'))
 
-		# if data == b'EOT':
-		# 	if not missing_packets:
-		# 		recv_monitor.send(sender_id, "Done".encode('utf-8'))
-		# 		break
-		# 	else:
-		# 		recv_monitor.send(sender_id, str(missing_packets).encode('utf-8'))
-		# 		print('Sent :', missing_packets)
-		# 		continue
+		if data == b'EOT':
+			if not missing_packets:
+				recv_monitor.send(sender_id, "Done".encode('utf-8'))
+				break
+			else:
+				recv_monitor.send(sender_id, str(missing_packets).encode('utf-8'))
+				print('Sent :', missing_packets)
+				continue
 
 		# get nums
 		cut = data.find(saperator)
 
 		if cut == -1:
-			# # get init info
-			# recv_monitor.send(sender_id, b"ACK")
-			# total_packet_size = int(data.decode('utf-8'))
-			# missing_packets = [*range(1, total_packet_size + 1)]
-			# continue
-
-			if data == b"EOT":
-				recv_monitor.send(sender_id, "Done".encode('utf-8'))
-				break
+			# get init info
+			recv_monitor.send(sender_id, b"ACK")
+			total_packet_size = int(data.decode('utf-8'))
+			missing_packets = [*range(1, total_packet_size + 1)]
 			continue
 		
 		packet_idx = data[:cut]
-		recv_monitor.send(sender_id, packet_idx)
-		# missing_packets.remove(int(packet_idx.decode('utf-8')))
-		print("Recieved: ", packet_idx)
+		missing_packets.remove(int(packet_idx.decode('utf-8')))
+		print(missing_packets)
 
 		msg = data[cut+2:]
 		data_list[packet_idx] = msg
