@@ -85,7 +85,6 @@ if __name__ == '__main__':
 			
 			time.sleep(TRANS_DELAY)
 
-
 		print(f'Sender: Got response from id {addr}: {data} for idx {i+1}/{len(data_list)}')
 	
 	# Exit! Make sure the receiver ends before the sender. send_end will stop the emulator.

@@ -132,7 +132,7 @@ class sender():
 
 				# update window size
 				print(f"New window size: {self.window_size_} PID: {int(self.window_size_ - adjustment)} Ratio: {current_ratio} ADJ: {-adjustment}")
-				self.window_size_ = max(1, min(int(self.window_size_ - adjustment), self.max_window_size_))
+				# self.window_size_ = max(1, min(int(self.window_size_ - adjustment), self.max_window_size_))
 				break
 
 			except:
