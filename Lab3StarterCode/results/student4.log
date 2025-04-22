@@ -1,0 +1,65 @@
+Running tests for student4.py
+========================================================================================================================
+Running test: tests/hi_avg_hi_var.ini
+	Total rebuffer time:      0.33
+	Total variation:          33.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 3.056
+
+========================================================================================================================
+Running test: tests/hi_avg_lo_var.ini
+	Total rebuffer time:      0.47
+	Total variation:          22.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 3.014
+
+========================================================================================================================
+Running test: tests/hi_avg_mi_var.ini
+	Total rebuffer time:      0.33
+	Total variation:          18.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 3.236
+
+========================================================================================================================
+Running test: tests/lo_avg_hi_var.ini
+	Total rebuffer time:      1.75
+	Total variation:          47.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 0.941
+
+========================================================================================================================
+Running test: tests/lo_avg_lo_var.ini
+	Total rebuffer time:      18.86
+	Total variation:          40.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 0.030
+
+========================================================================================================================
+Running test: tests/lo_avg_mi_var.ini
+	Total rebuffer time:      4.82
+	Total variation:          63.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 0.094
+
+========================================================================================================================
+Running test: tests/mi_avg_hi_var.ini
+	Total rebuffer time:      0.73
+	Total variation:          32.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 1.892
+
+========================================================================================================================
+Running test: tests/mi_avg_lo_var.ini
+	Total rebuffer time:      0.50
+	Total variation:          41.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 1.720
+
+========================================================================================================================
+Running test: tests/mi_avg_mi_var.ini
+	Total rebuffer time:      5.53
+	Total variation:          27.00
+User quality of experience = [2.00(Quality) - 8.00(Rebuffer Time) - 1.00(Variation)] / (Chunk Count)
+User quality of experience: 1.091
+
+========================================================================================================================
