@@ -66,8 +66,9 @@ LOOKAHEAD = 5
 RESERVOIR = 4.0
 CUSHION = 10.0
 THROUGHPUT_HISTORY = []
+REBUFFER_FLAG = False
 
-def update_bandwidth_history(current: float):
+def update_bandwidth_history(current):
     global THROUGHPUT_HISTORY
     if current > 0:
         THROUGHPUT_HISTORY.append(current)
@@ -75,19 +76,20 @@ def update_bandwidth_history(current: float):
         THROUGHPUT_HISTORY = THROUGHPUT_HISTORY[-10:]
 
 def get_bandwidth_stats():
-    short_window = THROUGHPUT_HISTORY[-2:] if len(THROUGHPUT_HISTORY) >= 2 else THROUGHPUT_HISTORY
-    long_window = THROUGHPUT_HISTORY[-5:] if len(THROUGHPUT_HISTORY) >= 5 else THROUGHPUT_HISTORY
+    short = THROUGHPUT_HISTORY[-2:] if len(THROUGHPUT_HISTORY) >= 2 else THROUGHPUT_HISTORY
+    long = THROUGHPUT_HISTORY[-5:] if len(THROUGHPUT_HISTORY) >= 5 else THROUGHPUT_HISTORY
 
-    short_avg = statistics.mean(short_window) if short_window else 1000.0
-    long_avg = statistics.mean(long_window) if long_window else 1000.0
+    short_avg = statistics.mean(short) if short else 1000.0
+    long_avg = statistics.mean(long) if long else 1000.0
     volatility = abs(short_avg - long_avg) / max(short_avg, long_avg)
 
-    return long_avg, volatility  # predicted bandwidth, confidence penalty
+    return long_avg, volatility
 
-def chuck_weight(chunk_bitrates: List[float]) -> List[float]:
+def chuck_weight(chunk_bitrates):
     return [1.0 / (bitrate / (i + 1)) for i, bitrate in enumerate(chunk_bitrates)]
 
-def compute_qoe_sequence(qualities, bitrates, buffer_init, bandwidth, spc, q_coef, v_coef, r_coef, smart_bias, confidence_penalty):
+def compute_qoe_sequence(qualities, bitrates, buffer_init, bandwidth, spc, q_coef, v_coef, r_coef, weight, confidence_penalty):
+    global REBUFFER_FLAG
     qoe = 0.0
     buffer = buffer_init
     rebuffer = 0.0
@@ -104,17 +106,18 @@ def compute_qoe_sequence(qualities, bitrates, buffer_init, bandwidth, spc, q_coe
             buffer -= download_time
 
         buffer += spc
-        qoe += q * q_coef + smart_bias[i][q] * 0.5  # reward smart chunk usage
+        qoe += q * q_coef + weight[i][q] * 0.5
 
         if prev_q is not None:
             variation_penalty = abs(q - prev_q) * v_coef
             if buffer < CUSHION:
-                variation_penalty *= 1.5
-            variation_penalty *= (1 + confidence_penalty)  # penalize jumps when confidence is low
+                variation_penalty *= 1.2
+            variation_penalty *= (1 + confidence_penalty)
             qoe -= variation_penalty
         prev_q = q
 
     qoe -= rebuffer * r_coef * (1 + confidence_penalty * 2)
+    REBUFFER_FLAG = rebuffer > 0.01  # penalty for rebuffering
     return qoe
 
 def student_entrypoint(client_message: ClientMessage):
@@ -145,10 +148,13 @@ def student_entrypoint(client_message: ClientMessage):
 	buffer_sec = client_message.buffer_seconds_until_empty
 	spc = client_message.buffer_seconds_per_chunk
 	levels = client_message.quality_levels
+     
+	if buffer_sec < CUSHION or REBUFFER_FLAG or confidence_penalty > 0.2:
+		bandwidth_est *= 0.8
 
 	future_bitrates = [client_message.quality_bitrates] + client_message.upcoming_quality_bitrates
 	lookahead_chunks = future_bitrates[:LOOKAHEAD]
-	smart_bias = [chuck_weight(c) for c in lookahead_chunks]
+	weight = [chuck_weight(c) for c in lookahead_chunks]
 
 	# Conservative fallback
 	if buffer_sec <= RESERVOIR:
@@ -171,7 +177,7 @@ def student_entrypoint(client_message: ClientMessage):
 			q_coef=client_message.quality_coefficient,
 			v_coef=client_message.variation_coefficient,
 			r_coef=client_message.rebuffering_coefficient,
-			smart_bias=smart_bias,
+			weight=weight,
 			confidence_penalty=confidence_penalty
 		)
 	if qoe > max_qoe:

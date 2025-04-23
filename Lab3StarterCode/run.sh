@@ -3,7 +3,7 @@
 # === CONFIGURATION ===
 TEST_DIR="tests"
 START_ID=1
-END_ID=6
+END_ID=5
 
 # === START ===
 for STUDENT_ID in $(seq $START_ID $END_ID); do
