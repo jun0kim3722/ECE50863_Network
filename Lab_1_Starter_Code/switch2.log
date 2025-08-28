@@ -1,16 +1,142 @@
 
 
-14:20:29.590591
+19:53:03.084450
 Register Request Sent
 
 
-14:20:29.591097
+19:53:03.085019
 Register Response received
 
 
-14:20:29.591270
+19:53:03.085182
 Routing Update
 2,0:0
 2,1:1
 2,2:2
+Routing Complete
+
+
+19:53:19.089240
+Neighbor Dead 0
+
+
+19:53:21.089762
+Routing Update
+2,0:-1
+2,1:1
+2,2:2
+Routing Complete
+
+
+19:53:36.703299
+Neighbor Alive 0
+
+
+19:53:36.703611
+Routing Update
+2,0:0
+2,1:1
+2,2:2
+Routing Complete
+
+
+20:21:15.777425
+Register Request Sent
+
+
+20:21:15.778052
+Register Response received
+
+
+20:21:15.778193
+Routing Update
+2,0:0
+2,1:1
+2,2:2
+Routing Complete
+
+
+20:26:09.567615
+Register Request Sent
+
+
+20:26:09.567928
+Register Response received
+
+
+20:31:09.742386
+Register Request Sent
+
+
+20:31:09.742846
+Register Response received
+
+
+20:31:09.742992
+Routing Update
+2,0:0
+2,1:1
+2,2:2
+Routing Complete
+
+
+20:31:21.745655
+Neighbor Dead 0
+
+
+20:31:23.746516
+Routing Update
+2,0:-1
+2,1:1
+2,2:2
+Routing Complete
+
+
+20:32:10.563293
+Register Request Sent
+
+
+20:32:10.563717
+Register Response received
+
+
+20:32:10.563838
+Routing Update
+2,0:0
+2,1:1
+2,2:2
+Routing Complete
+
+
+20:32:34.485961
+Register Request Sent
+
+
+20:32:58.876521
+Register Response received
+
+
+20:32:58.876783
+Routing Update
+2,0:1
+2,1:1
+2,2:2
+2,3:3
+2,4:3
+2,5:5
+Routing Complete
+
+
+20:33:22.880178
+Neighbor Dead 1
+
+
+20:33:26.881804
+Routing Update
+2,0:5
+2,1:-1
+2,2:2
+2,3:3
+2,4:3
+2,5:5
 Routing Complete

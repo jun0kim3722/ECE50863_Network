@@ -1,0 +1,30 @@
+
+
+20:32:58.875949
+Register Request Sent
+
+
+20:32:58.876534
+Register Response received
+
+
+20:32:58.876808
+Routing Update
+5,0:0
+5,1:0
+5,2:2
+5,3:2
+5,4:2
+5,5:5
+Routing Complete
+
+
+20:33:26.882012
+Routing Update
+5,0:0
+5,1:-1
+5,2:2
+5,3:2
+5,4:2
+5,5:5
+Routing Complete

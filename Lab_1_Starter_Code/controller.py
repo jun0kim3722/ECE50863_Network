@@ -11,6 +11,8 @@ from datetime import date, datetime
 import socket
 import heapq
 from copy import deepcopy
+import time
+
 
 import pdb
 
@@ -64,15 +66,21 @@ def register_response_sent(switch_id):
 # One example can be found in the sample log in starter code. 
 # After switch 1 is killed, the routing update from the controller does not have routes from switch 1 to other switches.
 
-def routing_table_update(routing_table):
+def routing_table_update(routing_table, dead_switches):
     log = []
     log.append(str(datetime.time(datetime.now())) + "\n")
     log.append("Routing Update\n")
     # for row in routing_table:
     for main_key in routing_table.keys():
+        if main_key in dead_switches: continue
+
         for dist_key in routing_table[main_key][0].keys():
-            if main_key != dist_key:
+            
+            if dist_key in dead_switches:
+                log.append(f"{main_key},{dist_key}:-1,9999\n")
+            elif main_key != dist_key:
                 log.append(f"{main_key},{dist_key}:{routing_table[main_key][1][dist_key][0]},{routing_table[main_key][0][dist_key]}\n")
+
             else:
                 log.append(f"{main_key},{dist_key}:{main_key},{routing_table[main_key][0][dist_key]}\n")
 
@@ -123,7 +131,9 @@ class server:
         self.port = port
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.server_socket.bind(("127.0.0.1", port))
+        self.dead_switches = []
         self.read_graph(filename)
+        self.need_update = False
 
     def read_graph(self, filename):
         with open(filename, "r") as f:
@@ -165,20 +175,23 @@ class server:
             print(switch_id, dead_switches)
 
         print("All switches alive")
-            
-    def send_respons(self):
+    
+    def init_send_respons(self, update=False):
         for id in self.switch_info.keys():
+            # 1. nhb switches, 2. alive, 3. port & addr of nbh
             client_addr = self.switch_info[id][1]
-            # 1. nhb switchs, 2. alive, 3. port & addr of nbh
             nhb = self.switch_info[id][0]
             alive = self.switch_info[id][2]
             nhb_addr = []
             for i in nhb:
                 nhb_addr.append(list(self.switch_info[i][1]))
 
-            msg = str(list(zip(nhb, alive, nhb_addr)))
+            msg = 'info:' + str(list(zip(nhb, alive, nhb_addr)))
             self.server_socket.sendto(msg.encode('UTF-8'), client_addr)
-            register_response_sent(id)
+
+            if update:
+                register_response_sent(id)
+
 
     def path_config(self, start):
         dist_list = {node: float('inf') for node in self.graph}
@@ -193,6 +206,13 @@ class server:
                 continue
 
             for nhb, cost in self.graph[curr_node].items():
+                nhb_idx = self.switch_info[curr_node][0].index(nhb)
+                if not self.switch_info[curr_node][2][nhb_idx]:
+                    cost = 9999
+                
+                if nhb in self.dead_switches:
+                    cost = 9999
+                
                 dist = curr_dist + cost
                 if dist < dist_list[nhb]:
                     dist_list[nhb] = dist
@@ -203,12 +223,16 @@ class server:
         return dist_list, path
     
     def routing_update(self):
-        self.routing_table = {switch: self.path_config(switch) for switch in self.graph}
+        self.routing_table = {switch: self.path_config(switch) for switch in self.graph if switch not in self.dead_switches}
 
         for main_key in self.routing_table.keys():
+            if main_key in self.dead_switches: continue
+
             msg = ''
             for dist_key in self.routing_table[main_key][0].keys():
-                if main_key != dist_key:
+                if dist_key in self.dead_switches:
+                    msg += (f"{main_key},{dist_key}:-1,9999\n")
+                elif main_key != dist_key:
                     msg += (f"{main_key},{dist_key}:{self.routing_table[main_key][1][dist_key][0]},{self.routing_table[main_key][0][dist_key]}\n")
                 else:
                     msg += (f"{main_key},{dist_key}:{main_key},{self.routing_table[main_key][0][dist_key]}\n")
@@ -216,8 +240,59 @@ class server:
 
             client_addr = self.switch_info[main_key][1]
             self.server_socket.sendto(msg.encode('UTF-8'), client_addr)
+        
+        routing_table_update(self.routing_table, self.dead_switches)
 
-        routing_table_update(self.routing_table)
+    def periodic(self):
+        # self.server_socket.settimeout(6.0)
+        while True:
+            is_restart = False
+            for switch_id, nhb in self.switch_info.items():
+                is_recv = False
+                st = time.time()
+                while time.time() - st < 6:
+                    update = self.server_socket.recvfrom(self.port)
+
+                    update_info = update[0].decode('utf-8').split(":")
+                    recv_key = int(update_info[0])
+
+                    if len(update_info) > 1:
+                            new_nhbs = [int(i) for i in update_info[1].split(",") if i != '']
+
+                    if recv_key in self.dead_switches:
+                        self.switch_info[recv_key][1] = update[1]
+                        self.dead_switches.remove(recv_key)
+                        topology_update_switch_alive(recv_key)
+                        self.init_send_respons()
+                        self.routing_update()
+                        is_restart = True
+                        break
+
+                    if recv_key == switch_id:
+                        is_recv = True
+                        break
+                
+                if is_restart: break
+
+                if is_recv:
+                    for nhb_idx in range(len(nhb[0])):
+                        nhb_id = nhb[0][nhb_idx]
+                        if nhb_id in self.dead_switches: continue
+                        
+                        is_connected = nhb_id in new_nhbs
+                        if self.switch_info[switch_id][2][nhb_idx] != is_connected:
+                            self.switch_info[switch_id][2][nhb_idx] = is_connected
+
+                            if not is_connected:
+                                topology_update_link_dead(switch_id, nhb_id)
+
+                            self.routing_update()
+                
+                elif not is_recv and switch_id not in self.dead_switches:
+                    topology_update_switch_dead(switch_id)
+                    self.dead_switches.append(switch_id)
+                    self.routing_update()
+
 
 def main():
     #Check for number of arguments and exit if host/port not provided
@@ -230,13 +305,11 @@ def main():
     # Write your code below or elsewhere in this file
     sv = server(int(sys.argv[1]), sys.argv[2])
     sv.init_switch()
-    sv.send_respons()
+    sv.init_send_respons(update=True)
     sv.routing_update()
+    sv.periodic()
 
-
-
-    
-    dist_list, path = sv.path_config(1)
+    # 
 
 
 if __name__ == "__main__":
