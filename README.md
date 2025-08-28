@@ -6,22 +6,22 @@ Designed and optimized sender/receiver logic beyond the baseline stop-and-wait s
 Evaluated performance across multiple emulated network environments and documented trade-offs between reliability, latency, and overhead.
 ### Report
 <p align="center">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide1.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide2.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide3.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide4.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide5.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide6.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide7.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide8.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide9.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide10.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide11.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide12.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide13.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide14.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide15.JPG" width="45%">
-  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide16.JPG" width="45%">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide1.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide2.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide3.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide4.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide5.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide6.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide7.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide8.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide9.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide10.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide11.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide12.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide13.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide14.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide15.JPG" width="700">
+  <img src="Lab_2_Starter_Code/report/Junyoung.Kim.Project2.final/Slide16.JPG" width="700">
 </p>
 
 ## Project3
@@ -31,17 +31,17 @@ Analyzed results across test cases, producing visualizations and research-style 
 
 ### Report
 <p align="center">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide1.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide2.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide3.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide4.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide5.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide6.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide7.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide8.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide9.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide10.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide11.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide12.JPG" width="45%">
-  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide13.JPG" width="45%">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide1.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide2.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide3.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide4.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide5.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide6.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide7.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide8.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide9.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide10.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide11.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide12.JPG" width="700">
+  <img src="Lab_3_Starter_Code/report/Junyoung.Kim.Project3.final/Slide13.JPG" width="700">
 </p>
